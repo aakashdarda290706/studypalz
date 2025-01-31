@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Python Fundamentals Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <style>
+        :root {
+            --primary: #ffd100;
+            --primary-light: #fff8e1;
+            --primary-dark: #ffc107;
+            --accent: #ff6b6b;
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+            --bg-white: #ffffff;
+            --bg-light: #f8f9fa;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --radius: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--primary-dark);
+        }
+
+        .header {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--primary-light);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .definition-box {
+            background: var(--primary-light);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .example-box {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            border: 1px solid var(--primary-light);
+        }
+
+        .code-block {
+            margin: 1.5rem 0;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .code-header {
+            background: #2d3436;
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-content {
+            background: #1e293b;
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .practice-section {
+            background: var(--primary-light);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            margin-top: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .practice-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .question-box {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--primary-light);
+        }
+
+        .question-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .key-points {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+        }
+
+        .key-points ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .key-points li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .key-points li::before {
+            content: "→";
+            color: var(--primary-dark);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--primary-light);
+        }
+
+        th {
+            background: var(--primary-light);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        .solution-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin-top: 1rem;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--primary-light);
+            color: var(--text-primary);
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .back-button {
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+    </a>
+<div class="container">
+    <div class="header">
+        <div class="title">Python Operators and Strings</div>
+        <div class="subtitle">Arithmetic, Relational, Logical, Bitwise Operators, Mathematical Functions, Strings in Python, 11-19 Lab Exercises</div>
+    </div>
+
+    <!-- Operators Section -->
+    <div class="section">
+        <div class="section-title">
+            <i class="fas fa-calculator"></i>
+            Operators in Python
+        </div>
+        <div class="section-content">
+            <div class="definition-box">
+                <strong>What are Operators?</strong>
+                <p>Operators are special symbols that perform operations on variables and values. Python provides a variety of operators for different types of operations.</p>
+            </div>
+
+            <!-- Arithmetic Operators -->
+            <div class="subsection">
+                <strong>1. Arithmetic Operators</strong>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td>+</td>
+                            <td>Addition</td>
+                            <td>5 + 3 = 8</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>Subtraction</td>
+                            <td>5 - 3 = 2</td>
+                        </tr>
+                        <tr>
+                            <td>*</td>
+                            <td>Multiplication</td>
+                            <td>5 * 3 = 15</td>
+                        </tr>
+                        <tr>
+                            <td>/</td>
+                            <td>Division</td>
+                            <td>5 / 3 = 1.666...</td>
+                        </tr>
+                        <tr>
+                            <td>//</td>
+                            <td>Floor Division</td>
+                            <td>5 // 3 = 1</td>
+                        </tr>
+                        <tr>
+                            <td>%</td>
+                            <td>Modulus</td>
+                            <td>5 % 3 = 2</td>
+                        </tr>
+                        <tr>
+                            <td>**</td>
+                            <td>Exponentiation</td>
+                            <td>5 ** 3 = 125</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <div class="code-block">
+                        <div class="code-header">Arithmetic Operators Example</div>
+                        <div class="code-content">
+                            <pre><code class="language-python">x = 10
+y = 3
+
+print(f"Addition: {x + y}")        # 13
+print(f"Subtraction: {x - y}")     # 7
+print(f"Multiplication: {x * y}")  # 30
+print(f"Division: {x / y}")        # 3.333...
+print(f"Floor Division: {x // y}") # 3
+print(f"Modulus: {x % y}")        # 1
+print(f"Exponent: {x ** y}")      # 1000</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Relational Operators -->
+            <div class="subsection">
+                <strong>2. Relational Operators</strong>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td>==</td>
+                            <td>Equal to</td>
+                            <td>5 == 5 is True</td>
+                        </tr>
+                        <tr>
+                            <td>!=</td>
+                            <td>Not equal to</td>
+                            <td>5 != 3 is True</td>
+                        </tr>
+                        <tr>
+                            <td>></td>
+                            <td>Greater than</td>
+                            <td>5 > 3 is True</td>
+                        </tr>
+                        <tr>
+                            <td><</td>
+                            <td>Less than</td>
+                            <td>5 < 3 is False</td>
+                        </tr>
+                        <tr>
+                            <td>>=</td>
+                            <td>Greater than or equal to</td>
+                            <td>5 >= 5 is True</td>
+                        </tr>
+                        <tr>
+                            <td><=</td>
+                            <td>Less than or equal to</td>
+                            <td>5 <= 3 is False</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <div class="code-block">
+                        <div class="code-header">Relational Operators Example</div>
+                        <div class="code-content">
+                            <pre><code class="language-python">x = 5
+y = 3
+
+print(f"Equal to: {x == y}")                 # False
+print(f"Not equal to: {x != y}")            # True
+print(f"Greater than: {x > y}")             # True
+print(f"Less than: {x < y}")                # False
+print(f"Greater than or equal to: {x >= y}") # True
+print(f"Less than or equal to: {x <= y}")    # False</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logical Operators -->
+            <div class="subsection">
+                <strong>3. Logical Operators</strong>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td>and</td>
+                            <td>True if both operands are true</td>
+                            <td>True and True is True</td>
+                        </tr>
+                        <tr>
+                            <td>or</td>
+                            <td>True if at least one operand is true</td>
+                            <td>True or False is True</td>
+                        </tr>
+                        <tr>
+                            <td>not</td>
+                            <td>Inverts the boolean value</td>
+                            <td>not True is False</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <div class="code-block">
+                        <div class="code-header">Logical Operators Example</div>
+                        <div class="code-content">
+                            <pre><code class="language-python">x = True
+y = False
+
+print(f"AND: {x and y}")  # False
+print(f"OR: {x or y}")    # True
+print(f"NOT x: {not x}")  # False
+print(f"NOT y: {not y}")  # True</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bitwise Operators -->
+            <div class="subsection">
+                <strong>4. Bitwise Operators</strong>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td>&</td>
+                            <td>Bitwise AND</td>
+                            <td>5 & 3 = 1</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                            <td>Bitwise OR</td>
+                            <td>5 | 3 = 7</td>
+                        </tr>
+                        <tr>
+                            <td>^</td>
+                            <td>Bitwise XOR</td>
+                            <td>5 ^ 3 = 6</td>
+                        </tr>
+                        <tr>
+                            <td>~</td>
+                            <td>Bitwise NOT</td>
+                            <td>~5 = -6</td>
+                        </tr>
+                        <tr>
+                            <td><<</td>
+                            <td>Left shift</td>
+                            <td>5 << 1 = 10</td>
+                        </tr>
+                        <tr>
+                            <td>>></td>
+                            <td>Right shift</td>
+                            <td>5 >> 1 = 2</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Strings Section -->
+    <div class="section">
+        <div class="section-title">
+            <i class="fas fa-font"></i>
+            Strings in Python
+        </div>
+        <div class="section-content">
+            <div class="definition-box">
+                <strong>String Operations:</strong>
+                <p>Strings in Python are immutable sequences of characters. They support various operations including indexing, slicing, and built-in methods.</p>
+            </div>
+
+            <!-- String Indexing and Slicing -->
+            <div class="example-box">
+                <strong>String Indexing and Slicing</strong>
+                <div class="code-block">
+                    <div class="code-header">String Operations Example</div>
+                    <div class="code-content">
+                        <pre><code class="language-python">text = "Python Programming"
+
+# Indexing
+print(text[0])     # 'P'
+print(text[-1])    # 'g'
+
+# Slicing
+print(text[0:6])   # 'Python'
+print(text[7:])    # 'Programming'
+print(text[:6])    # 'Python'
+print(text[::2])   # 'Pto rgamn'</code></pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Back to Home Button (Add at the very top of body) -->
+
+
+<!-- Add this section after Operators section and before Strings section -->
+<div class="section">
+    <div class="section-title">
+        <i class="fas fa-square-root-alt"></i>
+        Mathematical Functions
+    </div>
+    <div class="section-content">
+        <div class="definition-box">
+            <strong>Python Math Module</strong>
+            <p>Python provides a rich set of mathematical functions through the math module. Here are some commonly used functions:</p>
+        </div>
+
+        <!-- Basic Math Functions -->
+        <div class="subsection">
+            <strong>Basic Mathematical Functions</strong>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>math.ceil(x)</td>
+                        <td>Round up to nearest integer</td>
+                        <td>math.ceil(4.2) = 5</td>
+                    </tr>
+                    <tr>
+                        <td>math.floor(x)</td>
+                        <td>Round down to nearest integer</td>
+                        <td>math.floor(4.8) = 4</td>
+                    </tr>
+                    <tr>
+                        <td>math.sqrt(x)</td>
+                        <td>Square root</td>
+                        <td>math.sqrt(16) = 4.0</td>
+                    </tr>
+                    <tr>
+                        <td>math.pow(x, y)</td>
+                        <td>x raised to power y</td>
+                        <td>math.pow(2, 3) = 8.0</td>
+                    </tr>
+                    <tr>
+                        <td>abs(x)</td>
+                        <td>Absolute value</td>
+                        <td>abs(-5) = 5</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="example-box">
+                <div class="code-block">
+                    <div class="code-header">Basic Math Functions Example</div>
+                    <div class="code-content">
+                        <pre><code class="language-python">import math
+
+x = 4.6
+print(f"Ceiling: {math.ceil(x)}")       # 5
+print(f"Floor: {math.floor(x)}")        # 4
+print(f"Square root: {math.sqrt(16)}")  # 4.0
+print(f"2^3: {math.pow(2, 3)}")        # 8.0
+print(f"Absolute of -5: {abs(-5)}")     # 5</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trigonometric Functions -->
+        <div class="subsection">
+            <strong>Trigonometric Functions</strong>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>math.sin(x)</td>
+                        <td>Sine of x (x in radians)</td>
+                        <td>math.sin(math.pi/2) = 1.0</td>
+                    </tr>
+                    <tr>
+                        <td>math.cos(x)</td>
+                        <td>Cosine of x</td>
+                        <td>math.cos(0) = 1.0</td>
+                    </tr>
+                    <tr>
+                        <td>math.tan(x)</td>
+                        <td>Tangent of x</td>
+                        <td>math.tan(math.pi/4) = 1.0</td>
+                    </tr>
+                    <tr>
+                        <td>math.degrees(x)</td>
+                        <td>Convert radians to degrees</td>
+                        <td>math.degrees(math.pi) = 180.0</td>
+                    </tr>
+                    <tr>
+                        <td>math.radians(x)</td>
+                        <td>Convert degrees to radians</td>
+                        <td>math.radians(180) = 3.141592...</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="example-box">
+                <div class="code-block">
+                    <div class="code-header">Trigonometric Functions Example</div>
+                    <div class="code-content">
+                        <pre><code class="language-python">import math
+
+angle = math.pi/4  # 45 degrees
+print(f"Sin(45°): {math.sin(angle):.2f}")        # 0.71
+print(f"Cos(45°): {math.cos(angle):.2f}")        # 0.71
+print(f"Tan(45°): {math.tan(angle):.2f}")        # 1.00
+print(f"In degrees: {math.degrees(angle):.2f}")   # 45.00</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Random Number Functions -->
+        <div class="subsection">
+            <strong>Random Number Functions</strong>
+            <div class="example-box">
+                <div class="code-block">
+                    <div class="code-header">Random Number Generation Example</div>
+                    <div class="code-content">
+                        <pre><code class="language-python">import random
+
+# Random float between 0 and 1
+print(random.random())
+
+# Random integer between 1 and 10
+print(random.randint(1, 10))
+
+# Random choice from a list
+colors = ['red', 'green', 'blue']
+print(random.choice(colors))
+
+# Shuffle a list
+numbers = [1, 2, 3, 4, 5]
+random.shuffle(numbers)
+print(numbers)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- String Methods -->
+            <div class="example-box">
+                <strong>Common String Methods</strong>
+                <div class="code-block">
+                    <div class="code-header">String Methods Example</div>
+                    <div class="code-content">
+                        <pre><code class="language-python">text = "Python Programming"
+
+print(text.upper())         # 'PYTHON PROGRAMMING'
+print(text.lower())         # 'python programming'
+print(text.split())         # ['Python', 'Programming']
+print(text.replace('P', 'J')) # 'Jython Jrogramming'
+print(text.find('Pro'))     # 7
+print(text.count('P'))      # 2
+print(len(text))            # 18</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Practice Problems -->
+    <div class="practice-section">
+        <div class="practice-title">
+            <i class="fas fa-tasks"></i>
+            Practice Problems
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question-box">
+            <div class="question-title">
+                <i class="fas fa-calculator"></i>
+                12. Maximum of Three Numbers
+            </div>
+            <p>Write a program to find the maximum of three numbers.</p>
+            <div class="solution-box">
+                <div class="code-block">
+                    <div class="code-header">Solution</div>
+                    <div class="code-content">
+                        <pre><code class="language-python">def find_maximum(a, b, c):
+    return max(a, max(b, c))
+
+# Get input
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+num3 = float(input("Enter third number: "))
+
+# Calculate and display result
+maximum = find_maximum(num1, num2, num3)
+print(f"Maximum number is: {maximum}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question-box">
+            <div class="question-title">
+                <i class="fas fa-calendar"></i>
+                13. Leap Year Check
+            </div>
+            <p>Write a program to check if a year is leap year.</p>
+            <div class="solution-box">
+                <div class="code-block">
+                    <div class="code-header">Solution</div>
+                    <div class="code-content">
+                        <pre><code class="language-python">def is_leap_year(year):
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+# Get input
+year = int(input("Enter a year: "))
+
+# Check and display result
+if is_leap_year(year):
+    print(f"{year} is a leap year")
+else:
+    print(f"{year} is not a leap year")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question-box">
+            <div class="question-title">
+                <i class="fas fa-calendar-check"></i>
+                14. Valid Date Check
+            </div>
+            <p>Write a program to check if a date is valid.</p>
+            <div class="solution-box">
+                <div class="code-block">
+                    <div class="code-header">Solution</div>
+                    <div class="code-content">
+                        <pre><code class="language-python">def is_valid_date(day, month, year):
+    if month < 1 or month > 12:
+        return False
+        
+    # Days in each month
+    days_in_month = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    # Adjust February for leap year
+    if month == 2 and (year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)):
+        days_in_month[2] = 29
+        
+    return 1 <= day <= days_in_month[month]
+
+# Get input
+day = int(input("Enter day: "))
+month = int(input("Enter month: "))
+year = int(input("Enter year: "))
+
+# Check and display result
+if is_valid_date(day, month, year):
+    print(f"{day}/{month}/{year} is a valid date")
+else:
+    print(f"{day}/{month}/{year} is not a valid date")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+<div class="question-box">
+    <div class="question-title">
+        <i class="fas fa-square-root-alt"></i>
+        15. Quadratic Equation Roots
+    </div>
+    <p>Write a program to find the roots of a quadratic equation.</p>
+    <div class="solution-box">
+        <div class="code-block">
+            <div class="code-header">Solution</div>
+            <div class="code-content">
+                <pre><code class="language-python">import math
+
+def find_roots(a, b, c):
+    # Calculate discriminant
+    discriminant = b**2 - 4*a*c
+    
+    if discriminant > 0:
+        root1 = (-b + math.sqrt(discriminant)) / (2*a)
+        root2 = (-b - math.sqrt(discriminant)) / (2*a)
+        return f"Two distinct roots: {root1:.2f} and {root2:.2f}"
+    elif discriminant == 0:
+        root = -b / (2*a)
+        return f"One repeated root: {root:.2f}"
+    else:
+        real = -b / (2*a)
+        imag = math.sqrt(abs(discriminant)) / (2*a)
+        return f"Complex roots: {real:.2f} + {imag:.2f}i and {real:.2f} - {imag:.2f}i"
+
+# Get coefficients
+a = float(input("Enter coefficient a: "))
+b = float(input("Enter coefficient b: "))
+c = float(input("Enter coefficient c: "))
+
+# Calculate and display roots
+print(find_roots(a, b, c))</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Question 16 -->
+<div class="question-box">
+    <div class="question-title">
+        <i class="fas fa-text-width"></i>
+        16. Delete Characters at Index Divisible by 3
+    </div>
+    <p>Write a program to delete all characters from a string whose indices are divisible by 3.</p>
+    <div class="solution-box">
+        <div class="code-block">
+            <div class="code-header">Solution</div>
+            <div class="code-content">
+                <pre><code class="language-python">def remove_chars_at_three(string):
+    return ''.join(char for i, char in enumerate(string) if i % 3 != 0)
+
+# Get input
+text = input("Enter a string: ")
+
+# Process and display result
+result = remove_chars_at_three(text)
+print(f"Original string: {text}")
+print(f"Modified string: {result}")</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Question 17 -->
+<div class="question-box">
+    <div class="question-title">
+        <i class="fas fa-equals"></i>
+        17. Widest Equal Elements Fragment
+    </div>
+    <p>Find the length of the widest fragment where all elements are equal in a sequence of numbers ending with 0.</p>
+    <div class="solution-box">
+        <div class="code-block">
+            <div class="code-header">Solution</div>
+            <div class="code-content">
+                <pre><code class="language-python">def find_widest_equal_fragment():
+    numbers = []
+    max_length = 1
+    current_length = 1
+    
+    # Get input sequence
+    while True:
+        num = int(input("Enter a number (0 to end): "))
+        numbers.append(num)
+        if num == 0:
+            break
+    
+    # Find widest fragment
+    for i in range(1, len(numbers)):
+        if numbers[i] == numbers[i-1]:
+            current_length += 1
+            max_length = max(max_length, current_length)
+        else:
+            current_length = 1
+    
+    return max_length
+
+# Calculate and display result
+widest_length = find_widest_equal_fragment()
+print(f"Length of widest equal fragment: {widest_length}")</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Question 18 -->
+<div class="question-box">
+    <div class="question-title">
+        <i class="fas fa-bowling-ball"></i>
+        18. Bowling Pin Simulator
+    </div>
+    <p>Simulate bowling pins being knocked down and show remaining pins.</p>
+    <div class="solution-box">
+        <div class="code-block">
+            <div class="code-header">Solution</div>
+            <div class="code-content">
+                <pre><code class="language-python">def simulate_bowling():
+    # Get initial setup
+    N = int(input("Enter number of pins: "))
+    K = int(input("Enter number of balls to be rolled: "))
+    
+    # Initialize pins (all standing)
+    pins = ['I'] * N
+    
+    # Process each ball
+    for _ in range(K):
+        start = int(input("Enter start position: "))
+        stop = int(input("Enter stop position: "))
+        
+        # Mark pins as knocked down
+        for i in range(start-1, stop):
+            pins[i] = '.'
+    
+    # Display final state
+    return ''.join(pins)
+
+# Run simulation and display result
+result = simulate_bowling()
+print(f"Final pin configuration: {result}")</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Question 19 -->
+<div class="question-box">
+    <div class="question-title">
+        <i class="fas fa-clock"></i>
+        19. Time Difference Calculator
+    </div>
+    <p>Calculate the number of seconds between two timestamps.</p>
+    <div class="solution-box">
+        <div class="code-block">
+            <div class="code-header">Solution</div>
+            <div class="code-content">
+                <pre><code class="language-python">def calculate_time_difference():
+    # Get first timestamp
+    print("Enter first timestamp:")
+    h1 = int(input("Hours: "))
+    m1 = int(input("Minutes: "))
+    s1 = int(input("Seconds: "))
+    
+    # Get second timestamp
+    print("Enter second timestamp:")
+    h2 = int(input("Hours: "))
+    m2 = int(input("Minutes: "))
+    s2 = int(input("Seconds: "))
+    
+    # Convert both timestamps to seconds
+    time1 = h1 * 3600 + m1 * 60 + s1
+    time2 = h2 * 3600 + m2 * 60 + s2
+    
+    # Calculate difference
+    difference = time2 - time1
+    return difference
+
+# Calculate and display result
+seconds_between = calculate_time_difference()
+print(f"Seconds between timestamps: {seconds_between}")</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

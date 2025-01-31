@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StudyPalz - Your all-in-one study companion with smart tools, productivity features, and resource links">
+    <title>StudyPalz | Your Complete Study Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #008080;
+            --secondary-color: #005f5f;
+            --accent-color: #00a0a0;
+            --background-light: #f8fafc;
+            --text-primary: #2c3e50;
+            --text-secondary: #6c757d;
+            --white: #ffffff;
+            --radius: 16px;
+            --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-color: var(--background-light);
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 128, 128, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(0, 160, 160, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(0, 128, 128, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #f8fafc 0%, #e6f3f3 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23008080' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            margin-bottom: 40px;
+        }
+
+        .brand-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .brand-name::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            flex-grow: 1;
+            padding: 40px 0;
+        }
+
+        .hero-text {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            animation: slideUp 0.8s ease-out 0.2s backwards;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 20px;
+            border-left: 4px solid var(--primary-color);
+            max-width: 90%;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 24px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 128, 128, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 128, 128, 0.1), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .feature:hover {
+            transform: translateY(-6px) scale(1.02);
+            background: var(--white);
+            box-shadow: 0 20px 40px rgba(0, 128, 128, 0.15);
+        }
+
+        .feature:hover::before {
+            opacity: 1;
+        }
+
+        .feature h3 {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-icon {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            background: rgba(0, 128, 128, 0.1);
+            padding: 8px;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .feature:hover .feature-icon {
+            transform: scale(1.1);
+            background: rgba(0, 128, 128, 0.15);
+        }
+
+        .feature p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 48px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 8px 20px rgba(0, 128, 128, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+            transform: translateX(-100%);
+            transition: var(--transition);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 128, 128, 0.3);
+        }
+
+        .button:hover::before {
+            transform: translateX(100%);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content {
+                gap: 40px;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero-features {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .feature {
+                padding: 20px;
+            }
+
+            .button {
+                width: 100%;
+                padding: 14px 32px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-text,
+            .hero-features {
+                animation: none;
+            }
+
+            .feature,
+            .button,
+            .feature-icon {
+                transition: none;
+            }
+        }
+        .stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 0.75rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: teal(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: teal;
+    margin-bottom: 0.25rem;
+}
+
+.stat-desc {
+    font-size: 0.75rem;
+    color: teal(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <nav class="nav">
+                <span class="brand-name" role="heading" aria-level="1">📚 StudyPalz</span>
+            </nav>
+
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Your One-Stop Study Destination</h1>
+                    <p class="tagline">Everything you need to excel in your studies - from smart planning to focused study sessions - all in one powerful platform.</p>
+                    <a href="{% url 'signup' %}" class="button" role="button">Start Learning Today</a>
+                </div>
+                
+                <div class="hero-features">
+                    <div class="feature">
+                        <h3>
+                            <span class="feature-icon" aria-hidden="true">🎯</span>
+                            Smart Study System
+                        </h3>
+                        <p>Master concepts through Bloom's Taxonomy-based questions and personalized resources.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>
+                            <span class="feature-icon" aria-hidden="true">📊</span>
+                            Progress Tracking
+                        </h3>
+                        <p>Monitor your learning journey with detailed insights and visual progress reports.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>
+                            <span class="feature-icon" aria-hidden="true">🏆</span>
+                            Interactive Learning
+                        </h3>
+                        <p>Stay motivated with engaging challenges, timed quizzes, and achievements.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>
+                            <span class="feature-icon" aria-hidden="true">⚡</span>
+                            Study Planning
+                        </h3>
+                        <p>Optimize your study routine with smart schedules and structured paths.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>
+                            <span class="feature-icon" aria-hidden="true">⏱️</span>
+                            Focus Timer + Tasks
+                        </h3>
+                        <p>Pomodoro timer, smart to-do lists, and break reminders for productive sessions.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>
+                            <span class="feature-icon" aria-hidden="true">💡</span>
+                            Resource Links
+                        </h3>
+                        <p>Quick access to ChatGPT, curated YouTube tutorials, and reference materials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="hero-features">
+</body>
+</html>

@@ -1,0 +1,51 @@
+question_text,option_a,option_b,option_c,option_d,correct_answer,difficulty,sub_topic_id
+"Apply the Pythagorean identity to simplify the expression 1 - cos²(x).",sin²(x),tan²(x),sec²(x),cot²(x),A,easy,23
+"Using the double angle formula for sine, find the value of sin(2θ) when θ = 45°.",sin(90°),cos(90°),sin(45°),cos(45°),A,medium,23
+"Apply the formula for the sine of a sum sin(a + b) = sin(a)cos(b) + cos(a)sin(b) to simplify the expression sin(30° + 60°).",sin(90°),cos(90°),sin(30°)cos(60°) + cos(30°)sin(60°),sin(60°)cos(30°) + cos(60°)sin(30°),C,medium,23
+"Use the identity tan(x) = sin(x)/cos(x) to find the value of tan(45°).",1,0,∞,-1,A,easy,23
+"Simplify the expression sin²(x) + cos²(x) using the Pythagorean identity.",1,sin(x)cos(x),sin(x) + cos(x),tan(x),A,easy,23
+"Which of the following is the formula for sin(a + b)?","sin(a) + sin(b)","sin(a)cos(b) + cos(a)sin(b)","sin(a)cos(b) - cos(a)sin(b)","sin(a)cos(b) * cos(a)sin(b)",B,easy,22
+"What is the result of sin(90°)?",0,1,-1,Undefined,B,easy,22
+"Which of the following is the correct identity for tan(x)?","sin(x)/cos(x)","cos(x)/sin(x)","sin(x) * cos(x)","1/sin(x)",A,easy,22
+"What is the value of cos(60°)?",0.5,1,0,-1,A,easy,22
+"Which of the following is NOT a basic trigonometric function?","sin(x)","cos(x)","tan(x)","x^2",D,easy,22
+"Simplify: 2^3 (B1)",6,5,8,4,A,easy,19
+"Evaluate the expression: 5^2 (B1)",20,25,15,10,B,easy,19
+"Write 1/8 as a negative exponent of 2. (B2)",2^-3,2^-4,2^-2,2^-1,A,easy,19
+"Find the value of x in the equation: 2^x = 16. (B2)",x=3,x=4,x=2,x=5,B,medium,19
+"Simplify: (x^2 * x^3) (B3)",x^5,x^6,x^4,x^3,A,medium,19
+"Evaluate: (3^4) * (3^2) (B3)",3^6,3^8,3^4,3^5,A,medium,19
+"Determine the value of 4^x = 64 for x. (B4)",x=3,x=4,x=2,x=6,A,hard,19
+"Simplify the expression: (x^2)^3. (B4)",x^6,x^5,x^8,x^4,A,hard,19
+"Expand the expression (x^3 * y^4)^2. (B5)",x^6 * y^8,x^7 * y^9,x^9 * y^12,x^6 * y^10,A,hard,19
+"Find the value of x in the equation: (x^3)^2 = 256. (B5)",x=4,x=2,x=6,x=8,A,hard,19
+"Solve for x: 2x + 3 = 7. (B1)",x=2,x=1,x=3,x=4,A,easy,18
+"Find the value of x in the equation: 3x - 5 = 10. (B1)",x=5,x=3,x=2,x=4,A,easy,18
+"Solve the system of equations: x + y = 7 and x - y = 3. (B2)","x=5 y=2","x=4 y=3","x=6 y=1","x=7 y=0",A,medium,18
+"Find the solution to the system: 2x + 3y = 10 and x - y = 1. (B2)","x=3 y=2","x=1 y=3","x=2 y=4","x=4 y=1",A,medium,18
+"Solve the system of equations: 3x + 4y = 11 and x - 2y = 3. (B3)","x=2 y=1","x=4 y=1","x=3 y=2","x=1 y=3",A,medium,18
+"Solve the system of equations: 5x - 4y = 6 and 3x + 2y = 12. (B3)","x=3 y=2","x=1 y=4","x=2 y=3","x=4 y=1",A,medium,18
+"Determine the values of x and y in the system: 4x + 3y = 12 and 2x - y = 5. (B4)","x=2 y=2","x=1 y=4","x=3 y=1","x=4 y=0",A,hard,18
+"Find the solution to the system: x - y = 4 and x + 3y = 14. (B4)","x=6 y=2","x=5 y=3","x=7 y=1","x=4 y=5",A,hard,18
+"Analyze the system: 2x + y = 7 and 3x - 2y = 10. (B5)","x=3 y=1","x=2 y=2","x=4 y=0","x=1 y=3",A,hard,18
+"Determine if the system of equations has no solution, one solution, or infinitely many solutions: x + y = 5 and x + y = 8. (B5)","No solution","One solution","Infinitely many solutions","Multiple solutions",A,hard,18
+"Factorize: x^2 - 4. (B1)","(x - 2)(x + 2)","(x - 1)(x + 4)","(x - 3)(x + 3)","(x - 4)(x + 4)",A,easy,17
+"Factorize: x^2 + 6x + 9. (B1)","(x + 3)(x + 3)","(x + 2)(x + 4)","(x - 1)(x - 9)","(x + 5)(x - 1)",A,easy,17
+"Factorize: x^2 - 9x + 20. (B2)","(x - 4)(x - 5)","(x - 2)(x + 5)","(x + 4)(x - 5)","(x - 10)(x + 2)",A,medium,17
+"Factorize: 2x^2 + 7x + 3. (B2)","(2x + 3)(x + 1)","(x + 1)(2x + 3)","(2x + 1)(x + 3)","(x + 2)(x + 1)",A,medium,17
+"Factorize: x^2 - 5x - 24. (B3)","(x - 8)(x + 3)","(x + 8)(x - 3)","(x - 12)(x + 2)","(x + 5)(x - 4)",A,medium,17
+"Factorize: 3x^2 - 12x. (B3)","3x(x - 4)","3(x - 2)(x + 2)","(x - 2)(x + 6)","x(3x - 4)",A,medium,17
+"Factorize: 4x^2 - 25. (B4)","(2x - 5)(2x + 5)","(x - 5)(x + 5)","(2x - 10)(2x + 5)","(4x - 5)(x + 5)",A,hard,17
+"Factorize: x^2 - 6x + 8. (B4)","(x - 4)(x - 2)","(x - 3)(x - 3)","(x - 2)(x - 4)","(x - 1)(x - 8)",A,hard,17
+"Factorize the quadratic: x^2 + 4x - 21. (B5)","(x + 7)(x - 3)","(x - 7)(x + 3)","(x + 2)(x - 11)","(x - 4)(x + 5)",A,hard,17
+"Factorize: 6x^2 + 11x - 35. (B5)", "(2x + 5)(3x - 7)", "(3x + 5)(2x - 7)", "(x + 5)(6x - 7)", "(6x + 5)(x - 7)", A, hard, 17
+"Find the degree of the polynomial: 4x^3 + 2x^2 - x + 5. (B1)", "3", "2", "1", "4", A, easy, 16
+"Identify the leading term of the polynomial: 5x^4 - 3x^3 + x - 2. (B1)", "5x^4", "3x^3", "x", "-2", A, easy, 16
+"Find the value of the polynomial: 3x^2 + 2x - 5 for x = 2. (B2)", "9", "7", "11", "5", A, medium, 16
+"Evaluate the polynomial: 4x^2 + 3x + 1 at x = -1. (B2)", "6", "2", "4", "3", B, medium, 16
+"Find the roots of the polynomial: x^2 - 3x + 2. (B3)", "x = 1 or 2", "x = -1 or 2", "x = 0 or -2", "x = -1 or -2", A, medium, 16
+"Find the value of x if x^2 + 6x + 9 = 0. (B3)", "x = -3", "x = 3", "x = 1", "x = 0", A, medium, 16
+"Simplify the polynomial: (x + 2)(x - 3). (B4)", "x^2 - x - 6", "x^2 + x - 6", "x^2 - 6", "x^2 + 6x + 6", A, hard, 16
+"Factor the polynomial: x^2 + 5x + 6. (B4)", "(x + 2)(x + 3)", "(x + 1)(x + 6)", "(x - 2)(x + 3)", "(x + 1)(x + 5)", A, hard, 16
+"Find the quotient of the polynomial: (x^3 - x) ÷ x. (B5)", "x^2 - 1", "x^2 + 1", "x^3 - 1", "x^2 - x", A, hard, 16
+"Divide the polynomial: (2x^2 + 3x + 5) ÷ (x + 1). (B5)", "2x - 1", "2x + 5", "2x^2 + 3x", "2x + 3", B, hard, 16

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results | StudyPalz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #008080;
+    --secondary-color: #005f5f;
+    --background-gradient: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    --white: #ffffff;
+    --text-color: #2c3e50;
+    --text-muted: #6c757d;
+    --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --radius: 16px;
+    --font-family-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --transition-speed: 0.3s;
+    --feedback-red: #dc3545;
+    --feedback-yellow: #ffc107;
+    --feedback-green: #28a745;
+    --feedback-blue: #0d6efd;
+    --feedback-purple: #6f42c1;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    background: var(--background-gradient);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--box-shadow);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.result-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.result-header h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    letter-spacing: -0.02em;
+}
+
+.username {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: #f8f9fa;
+    border-radius: calc(var(--radius) / 2);
+    display: inline-block;
+    font-weight: 500;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: var(--transition-speed);
+}
+
+.stat-box:hover {
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.weak-topics {
+    margin-bottom: 2.5rem;
+    background: #f8f9fa;
+    padding: 1.75rem;
+    border-radius: var(--radius);
+}
+
+.weak-topics h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.topic-list {
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.topic-list li {
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border-radius: calc(var(--radius) / 2);
+    transition: var(--transition-speed);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+}
+
+.topic-list li:hover {
+    transform: translateX(4px);
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.buttons {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.875rem 1.75rem;
+    border-radius: calc(var(--radius) / 2);
+    text-decoration: none;
+    transition: var(--transition-speed);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 1.75rem;
+    }
+
+    .result-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .buttons {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.score-feedback {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.feedback {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: var(--transition-speed);
+}
+
+.feedback[data-level="needs-improvement"] {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--feedback-red);
+}
+
+.feedback[data-level="needs-improvement"]::before {
+    content: '😟';
+}
+
+.feedback[data-level="average"] {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--feedback-yellow);
+}
+
+.feedback[data-level="average"]::before {
+    content: '🤔';
+}
+
+.feedback[data-level="good"] {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--feedback-green);
+}
+
+.feedback[data-level="good"]::before {
+    content: '😊';
+}
+
+.feedback[data-level="very-good"] {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: var(--feedback-blue);
+}
+
+.feedback[data-level="very-good"]::before {
+    content: '🎉';
+}
+
+.feedback[data-level="excellent"] {
+    background-color: rgba(111, 66, 193, 0.1);
+    color: var(--feedback-purple);
+}
+
+.feedback[data-level="excellent"]::before {
+    content: '🌟';
+}
+
+.feedback:hover {
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow);
+}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="result-header">
+            <h1>Quiz Results</h1>
+            <div class="username">{{ username }}</div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">Score</div>
+                <div class="stat-value">{{ result.score }}</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Time Taken</div>
+                <div class="stat-value">{{ result.time_taken }}s</div>
+            </div>
+        </div>
+    
+        <div class="score-feedback">
+            {% if result.score < 5 %}
+                <div class="feedback" data-level="needs-improvement">Needs Improvement</div>
+            {% elif result.score == 5 %}
+                <div class="feedback" data-level="average">Average</div>
+            {% elif result.score > 5 and result.score <= 7 %}
+                <div class="feedback" data-level="good">Good</div>
+            {% elif result.score > 7 and result.score <= 9 %}
+                <div class="feedback" data-level="very-good">Very Good</div>
+            {% elif result.score == 10 %}
+                <div class="feedback" data-level="excellent">Excellent</div>
+            {% endif %}
+        </div>
+    
+        <div class="weak-topics">
+            <h2>Areas for Improvement</h2>
+            <ul class="topic-list">
+                {% for topic in weak_topics %}
+                <li>{{ topic.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <div class="buttons">
+            <a href="{% url 'dashboard' %}" class="button">
+                Back to Dashboard
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </a>
+        </div>
+    </div>
+</body>
+</html>    

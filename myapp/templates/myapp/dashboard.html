@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+:root {
+    --primary-color: #008080;
+    --secondary-color: #005f5f;
+    --background-gradient: linear-gradient(135deg, #f0f7f7 0%, #008080 100%);
+    --card-background: rgba(255, 255, 255, 0.98);
+    --text-primary: #1a2b3c;
+    --text-secondary: #64748b;
+    --border-color: rgba(0, 128, 128, 0.12);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 2.5rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--background-gradient);
+    min-height: 100vh;
+    color: var(--text-primary);
+    padding: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+/* Base Layout */
+.dashboard-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: var(--spacing-xl);
+}
+
+/* Header Styles */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    background: var(--card-background);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.brand-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--card-background);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.brand-logo:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Welcome Section */
+.welcome-header {
+    background: var(--card-background);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+/* Card Styles */
+.card {
+    background: var(--card-background);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-xl);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Topic Items */
+.topic-item {
+    background: rgba(248, 249, 250, 0.9);
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.topic-item:hover {
+    transform: translateX(6px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Button Styles */
+.button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 128, 128, 0.2);
+}
+
+.button-secondary {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.button-success {
+    background: #01b743;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.button-danger {
+    background: #EF4444;
+}
+
+/* Progress Styles */
+.progress-container {
+    background: rgba(248, 249, 250, 0.9);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin: var(--spacing-lg) 0;
+    height: 8px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 1s ease-in-out;
+}
+
+/* Achievement Styles */
+#achievement-list li {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    margin-bottom: var(--spacing-sm);
+}
+
+#achievement-list li::before {
+    content: '🏆';
+    margin-right: var(--spacing-md);
+    font-size: 1.25rem;
+}
+
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.celebration-message {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes pop-in {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.points-earned {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: var(--spacing-md) 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #008080;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fall 3s linear infinite;
+}
+.form-row {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.form-input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.95rem;
+    width: 100%;
+    background: white;
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 128, 128, 0.1);
+}
+
+.form-input::placeholder {
+    color: var(--text-secondary);
+}
+/* Previous CSS styles remain the same... */
+/* Previous CSS styles remain the same... */
+
+/* Enhanced Resource Items */
+.resource-item {
+    background: white;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.resource-item::before {
+    content: '📚';
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+}
+
+.resource-item::after {
+    content: '→';
+    position: absolute;
+    right: var(--spacing-lg);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.resource-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+
+.resource-item:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.resource-item a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    flex: 1;
+    padding-right: var(--spacing-xl);
+}
+
+.resource-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.resource-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.resource-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.resource-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 128, 128, 0.1);
+    color: var(--primary-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+/* Resource Item States */
+.resource-item.new::after {
+    content: 'NEW';
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+}
+
+.resource-item.featured {
+    background: linear-gradient(45deg, rgba(0, 128, 128, 0.05) 0%, transparent 100%);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Resource Grid Layout Option */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .resource-item {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--spacing-md);
+    }
+
+    .resource-item::before {
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .resource-item::after {
+        display: none;
+    }
+
+    .resource-item a {
+        padding-right: 0;
+    }
+
+    .resource-meta {
+        align-items: center;
+    }
+
+    .resource-tag {
+        margin-top: var(--spacing-xs);
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Rest of the previous CSS remains the same... */
+
+/* Timetable Styles */
+#timetable-list {
+    margin-top: var(--spacing-lg);
+}
+
+#timetable-list li {
+    background: white;
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+#timetable-list li:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.timetable-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.timetable-topic {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.timetable-deadline {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timetable-deadline::before {
+    content: '📅';
+    font-size: 1rem;
+}
+
+.timetable-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.timetable-wrapper {
+    margin-top: var(--spacing-md);
+}
+
+.timetable-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.deadline-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    #timetable-list li {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-sm);
+    }
+
+    .timetable-info {
+        align-items: center;
+    }
+
+    .timetable-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .timetable-header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .timetable-deadline {
+        justify-content: center;
+    }
+}
+
+/* Rest of the previous CSS remains the same... */
+/* Select Input Specific Styles */
+select.form-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+.deadline-form {
+    background: rgba(248, 249, 250, 0.9);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-md);
+    border: 1px solid var(--border-color);
+}
+
+/* Date Input Specific Styles */
+input[type="date"].form-input {
+    min-height: 2.8rem;
+}
+
+/* Error State */
+.form-input.error {
+    border-color: #EF4444;
+}
+
+.error-message {
+    color: #EF4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Disabled State */
+.form-input:disabled {
+    background-color: rgba(248, 249, 250, 0.8);
+    cursor: not-allowed;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .feature-card {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: var(--spacing-sm);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-container {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .welcome-header {
+        padding: var(--spacing-lg);
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .card {
+        padding: var(--spacing-lg);
+    }
+
+    .topic-item {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .card-header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        text-align: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div>
+            <a href="/" class="brand-logo">StudyPalz</a> 
+            <a href="/select_topic" class="brand-logo">Take another Quiz</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScgnNrIFW-Ox4e6l6cEYrzxzvwO_CBPezlzvB4Hd2Wy6fj3JA/viewform?usp=header" class="brand-logo" target="_blank">Form1</a>
+            
+        </div>
+
+        <div class="welcome-header">
+            <h1>Welcome back, {{ user.username }}!</h1>
+            <p>Track your learning journey and improve your skills with personalized recommendations</p>
+        </div>
+
+        <div class="dashboard-grid">
+           
+            <div class="card">
+                <div class="card-header">
+                    <h2>Learning Resources</h2>
+                </div>
+                <ul> <a href ="https://drive.google.com/drive/folders/1-gRGQMxs3uF8S9XXNTsA2I-hBEsZpj3S?usp=sharing" target="_blank" class="brand-logo">
+                    Short Notes - formulas
+                </a></ul><br>
+                <ul>
+                    {% for resource in resources %}
+                        <li class="resource-item">
+                            <a href="{{ resource.link }}" target="_blank">
+                                {{ resource.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        
+
+
+
+        <!-- Progress Overview Card -->
+        <div class="card feature-card">
+            <div class="card-header">
+                <h2>Progress Overview</h2>
+                <span class="completion-rate">{{ completion_percentage }}% Complete</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="completionProgress"></div>
+            </div>
+            <div class="chart-container">
+                <canvas id="progressChart"></canvas>
+            </div>
+        </div>
+      
+        <div class="card">
+            <div class="card-header">
+                <h2>Solve Your Doubts here</h2>
+            </div>
+            <ul>
+                <li class="resource-item">
+                    <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://google.com/" target="_blank">Google</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://youtube.com/" target="_blank">YouTube</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://doubtnut.com/" target="_blank">Doubtnut</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://brainly.com/" target="_blank">Brainly</a>
+                </li>
+            </ul>
+        </div>
+
+        
+            <!-- Celebration Animation -->
+            <div id="confetti-container" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:9999;"></div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Topics Attempted</h2>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="completionProgress"></div>
+                </div>
+                <ul>
+                    {% for topic in completed_topics %}
+                        <li class="topic-item">
+                            <div class="topic-info">
+                                <div class="topic-name">{{ topic.name }}</div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Test Yourself Again</h2>
+        </div>
+        <ul>
+            {% for topic in weak_topics %}
+                <li class="topic-item">
+                    <div class="topic-info">
+                        <div class="topic-name">{{ topic.name }}</div>
+                    </div>
+                    <button class="button" onclick="reattemptQuiz('{{ topic.id }}')">
+                        Retry Quiz
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Pomodoro</h2>
+        </div>
+        <p>Boost your focus with the Pomodoro technique: 25-minute work sessions followed by short breaks.</p>
+        <a href="/pomodoro" class="button">Start Pomodoro Session"</a>
+    </div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScgnNrIFW-Ox4e6l6cEYrzxzvwO_CBPezlzvB4Hd2Wy6fj3JA/viewform?usp=header" class="brand-logo" target="_blank">Form2</a>
+            
+        </div>
+
+    <script>
+        // Animation on Page Load
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to('.dashboard-container', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+            gsap.to('.card', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
+        });
+    
+        // Progress Chart Initialization
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        const progressChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: JSON.parse('{{ progress_dates|escapejs }}'),
+                datasets: [{
+                    label: 'Progress Score',
+                    data: JSON.parse('{{ progress_scores|escapejs }}'),
+                    backgroundColor: 'rgba(0, 128, 128, 0.1)',
+                    borderColor: 'rgba(0, 128, 128, 1)',
+                    borderWidth: 2.5,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: 'rgba(0, 128, 128, 1)',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(0, 0, 0, 0.04)', drawBorder: false }, ticks: { padding: 10 }},
+                    x: { grid: { display: false }, ticks: { padding: 10 }}
+                }
+            }
+        });
+    
+        // Progress Bar Update
+        const completionPercentage = (completedTopics / totalTopics) * 100;
+        document.getElementById('completionProgress').style.width = `${completionPercentage}%`;
+    
+        // Topic Actions
+        function reattemptQuiz(topicId) { window.location.href = `/reattempt_quiz/${topicId}`; }
+        function reviewTopic(topicId) { window.location.href = `/review/${topicId}`; }
+        function selectTopic(topicId) { window.location.href = `/select_topic/${topicId}`; }
+    
+        // Save Deadline for Topic
+        function saveDeadline(topicId) {
+            const date = document.getElementById(`date-picker-${topicId}`).value;
+            if (date) {
+                document.getElementById(`deadline-${topicId}`).innerText = `Deadline: ${date}`;
+            }
+        }
+    
+        // Set a new deadline
+function setDeadline() {
+    const topicId = document.getElementById("topic-select").value;
+    const deadlineDate = document.getElementById("deadline-date").value;
+
+    if (topicId && deadlineDate) {
+        fetch('/study-schedule/set-deadline/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken()
+            },
+            body: JSON.stringify({
+                topic_id: topicId,
+                deadline: deadlineDate
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Deadline set successfully!');
+                window.location.reload();
+            } else {
+                alert('Error: ' + data.error);
+            }
+        });
+    } else {
+        alert("Please select a topic and date.");
+    }
+}
+
+// Mark a task as completed
+function markCompleted(topicId) {
+    fetch(`/study-schedule/mark-completed/${topicId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCSRFToken()
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Task marked as completed!');
+            window.location.reload();
+        } else {
+            alert('Error: ' + data.error);
+        }
+    });
+}
+
+// Fetch CSRF token
+function getCSRFToken() {
+    const cookieValue = document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)');
+    return cookieValue ? cookieValue.pop() : '';
+}
+
+        function removeDeadline(topicId) {
+            const deadlineElement = document.getElementById(`deadline-${topicId}`);
+            deadlineElement.innerText = 'No Deadline Set';
+        }
+        function showCelebration(points) {
+    const confettiContainer = document.createElement('div');
+    confettiContainer.className = 'confetti-container';
+    
+    const celebrationMessage = document.createElement('div');
+    celebrationMessage.className = 'celebration-message';
+    celebrationMessage.innerHTML = `
+        <h2>Congratulations!</h2>
+        <div class="points-earned">+${points} Points!</div>
+        <p>Keep up the great work!</p>
+    `;
+    
+    confettiContainer.appendChild(celebrationMessage);
+    document.body.appendChild(confettiContainer);
+    
+    // Create confetti pieces
+    for (let i = 0; i < 100; i++) {
+        createConfettiPiece(confettiContainer);
+    }
+    
+    setTimeout(() => {
+        confettiContainer.style.opacity = '0';
+        setTimeout(() => {
+            confettiContainer.remove();
+        }, 500);
+    }, 3000);
+}
+
+
+function createConfettiPiece(container) {
+    const colors = ['#008080', '#005f5f', '#00a3a3', '#00cccc', '#gold'];
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.animationDelay = Math.random() * 3 + 's';
+    confetti.style.opacity = Math.random();
+    confetti.style.transform = `scale(${Math.random()})`;
+    container.appendChild(confetti);
+    
+    setTimeout(() => {
+        confetti.remove();
+    }, 3000);
+}
+    
+        function startConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+    
+            const confettiPieces = Array.from({ length: 300 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                size: Math.random() * 10 + 5,
+                color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                speed: Math.random() * 5 + 2
+            }));
+    
+            function draw() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                confettiPieces.forEach(p => {
+                    context.fillStyle = p.color;
+                    context.fillRect(p.x, p.y, p.size, p.size);
+                    p.y += p.speed;
+                    if (p.y > canvas.height) p.y = -p.size;
+                });
+                requestAnimationFrame(draw);
+            }
+    
+            draw();
+        }
+    
+        function stopConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            if (canvas) canvas.remove();
+        }
+    
+    
+    
+    </script>
+</body>
+</html>    

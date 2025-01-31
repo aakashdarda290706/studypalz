@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyPalz - Engineering Notes Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #ffd100;
+            --primary-light: #fff3b4;
+            --primary-dark: #e6bc00;
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+            --bg-light: #ffffff;
+            --bg-off-white: #f8f9fa;
+            --sidebar-width: 300px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background: var(--bg-off-white);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Enhanced Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-off-white);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ccc;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--bg-light);
+            padding: 2rem;
+            position: fixed;
+            box-shadow: var(--shadow);
+            overflow-y: auto;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            padding: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .logo i {
+            color: var(--primary-dark);
+        }
+
+        .subject {
+            margin-bottom: 2.5rem;
+            background: var(--bg-off-white);
+            padding: 1.5rem;
+            border-radius: 16px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .subject:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-light);
+        }
+
+        .subject-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subject-title i {
+            color: var(--primary-dark);
+            font-size: 20px;
+        }
+
+        .subject-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            padding-left: 30px;
+            line-height: 1.5;
+        }
+
+        .chapters {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .chapters li {
+            margin-bottom: 0.8rem;
+        }
+
+        .chapters a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .chapters a:hover {
+            color: var(--text-primary);
+            background: var(--primary-light);
+            transform: translateX(4px);
+            border-color: var(--primary);
+        }
+
+        .chapters a i {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 3rem;
+            flex-grow: 1;
+            background: var(--bg-light);
+        }
+
+        .welcome-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            text-align: center;
+            padding: 3.5rem;
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--primary-light);
+        }
+
+        .welcome-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .welcome-title i {
+            color: var(--primary);
+            transform: rotate(-10deg);
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            background: var(--bg-off-white);
+            border-radius: 16px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--primary-light);
+            color: var(--text-primary);
+            margin-left: 8px;
+            gap: 4px;
+        }
+
+        .status-badge i {
+            font-size: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Previous HTML content remains the same, just updating the status badges and icons -->
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            StudyPalz
+        </div>
+        
+        <div class="subject">
+            <div class="subject-title">
+                <i class="fas fa-code"></i>
+                Python
+            </div>
+            <div class="subject-description">
+                Master programming fundamentals, data structures, and advanced Python concepts
+            </div>
+            <ul class="chapters">
+                <li><a href="progress.html"><i class="fas fa-file-code"></i> Introduction to Python <span class="status-badge"><i class="fas fa-star"></i> New</span></a></li>
+                <li><a href="chapter2.html"><i class="fas fa-file-code"></i> Data Types & Variables</a></li>
+                <li><a href="python/chapter3.html"><i class="fas fa-file-code"></i> Control Structures</a></li>
+                <li><a href="python/chapter4.html"><i class="fas fa-file-code"></i> Functions & Modules</a></li>
+                <li><a href="python/chapter5.html"><i class="fas fa-file-code"></i> Object-Oriented Programming</a></li>
+                <li><a href="python/chapter6.html"><i class="fas fa-file-code"></i> Advanced Concepts</a></li>
+            </ul>
+        </div>
+        
+        <div class="subject">
+            <div class="subject-title">
+                <i class="fas fa-square-root-alt"></i>
+                Calculus & Statistics
+            </div>
+            <div class="subject-description">
+                Explore mathematical concepts, statistical analysis, and problem-solving techniques
+            </div>
+            <ul class="chapters">
+                <li><a href="cas/chapter1.html"><i class="fas fa-calculator"></i> Limits & Continuity <span class="status-badge"><i class="fas fa-clock"></i> Updated</span></a></li>
+                <li><a href="cas/chapter2.html"><i class="fas fa-calculator"></i> Differentiation</a></li>
+                <li><a href="cas/chapter3.html"><i class="fas fa-calculator"></i> Integration</a></li>
+                <li><a href="cas/chapter4.html"><i class="fas fa-calculator"></i> Probability Basics</a></li>
+                <li><a href="cas/chapter5.html"><i class="fas fa-calculator"></i> Statistical Distributions</a></li>
+                <li><a href="cas/chapter6.html"><i class="fas fa-calculator"></i> Hypothesis Testing</a></li>
+            </ul>
+        </div>
+        
+        <div class="subject">
+            <div class="subject-title">
+                <i class="fas fa-bolt"></i>
+                Applied Electromechanics
+            </div>
+            <div class="subject-description">
+                Understand electrical systems, mechanical principles, and their practical applications
+            </div>
+            <ul class="chapters">
+                <li><a href="aem/chapter1.html"><i class="fas fa-plug"></i> Electric Fields & Forces</a></li>
+                <li><a href="aem/chapter2.html"><i class="fas fa-plug"></i> Circuit Analysis</a></li>
+                <li><a href="aem/chapter3.html"><i class="fas fa-plug"></i> Magnetism</a></li>
+                <li><a href="aem/chapter4.html"><i class="fas fa-plug"></i> Electromagnetic Induction</a></li>
+                <li><a href="aem/chapter5.html"><i class="fas fa-plug"></i> AC Circuits</a></li>
+                <li><a href="aem/chapter6.html"><i class="fas fa-plug"></i> Applications <span class="status-badge"><i class="fas fa-rocket"></i> Popular</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="welcome-container">
+            <div class="welcome-title">
+                <i class="fas fa-book-reader"></i>
+                Welcome to StudyPalz
+            </div>
+            <div class="welcome-subtitle">
+                Your ultimate learning companion for Module 2 first-year engineering studies. Access meticulously organized notes, comprehensive guides, and expert-curated content for viva preparation, laboratory work, and end-semester examinations.
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="feature-title">Comprehensive Notes</div>
+                    <div class="feature-description">
+                        Access carefully structured study materials covering all essential topics and concepts, designed for optimal learning and retention
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="feature-title">Lab Materials</div>
+                    <div class="feature-description">
+                        Step-by-step laboratory procedures, detailed experiment guides, and practical insights for hands-on learning
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="feature-title">Exam Preparation</div>
+                    <div class="feature-description">
+                        Comprehensive practice questions, previous year papers, and expert tips for viva and examination success
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
